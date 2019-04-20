@@ -13,6 +13,7 @@ section{
 	margin: 0 auto;
 	width: 20%;
 }
+
 section .selectbox_wrapper{
 	display: flex;
 	flex-direction: column;
@@ -43,4 +44,13 @@ section .selectbox_wrapper .submit_button{
 }
 section .selectbox_wrapper .submit_button:hover{
 	opacity: 1;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    section{
+		margin: 0 auto;
+		width: 80%;
+	}
 }
