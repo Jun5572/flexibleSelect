@@ -17,6 +17,7 @@ function generateOptionTags( changedSelect, targetObjectData, targetElement, att
 	let relational_object = targetObjectData.filter(function(obj){
 		return obj.parent_id === selected_category_id;
 	});
+		console.log(relational_object);
 	// value値が0のものが選択された場合の処理
 	if( selected_category_id === 0 ){
 		// parentカテゴリーの「選択してください」が選択されたら全てリセット

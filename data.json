@@ -233,28 +233,38 @@
         },
         {
             "id": 29,
-            "name": "JAL",
+            "name": "タクシー",
             "parent_id": 11
         },
         {
             "id": 30,
-            "name": "ANA",
+            "name": "バス",
             "parent_id": 11
         },
         {
             "id": 31,
-            "name": "Star Alliance",
-            "parent_id": 11
+            "name": "JAL",
+            "parent_id": 12
         },
         {
             "id": 32,
-            "name": "Air Asia",
-            "parent_id": 11
+            "name": "ANA",
+            "parent_id": 12
         },
         {
             "id": 33,
+            "name": "Star Alliance",
+            "parent_id": 12
+        },
+        {
+            "id": 34,
+            "name": "Air Asia",
+            "parent_id": 12
+        },
+        {
+            "id": 35,
             "name": "Air Canada",
-            "parent_id": 11
+            "parent_id": 12
         }
     ]
 }
