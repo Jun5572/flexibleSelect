@@ -11,7 +11,7 @@ body{
 }
 section{
 	margin: 0 auto;
-	width: 20%;
+	width: 50%;
 }
 
 section .selectbox_wrapper{
@@ -51,6 +51,6 @@ section .selectbox_wrapper .submit_button:hover{
 @media screen and (max-width: 1024px) {
     section{
 		margin: 0 auto;
-		width: 80%;
+		min-width: 90vw;
 	}
 }
