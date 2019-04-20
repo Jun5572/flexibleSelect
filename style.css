@@ -1,0 +1,46 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	width: 100%;
+	min-height: 100vh;
+	background: aliceblue;
+	font-size: 18px;
+}
+section{
+	margin: 0 auto;
+	width: 20%;
+}
+section .selectbox_wrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-top: 100px;
+}
+section .selectbox_wrapper label{
+
+}
+section .selectbox_wrapper select{
+	margin-bottom: 20px;
+	font-size: 1em;
+	height: 50px;
+	outline: none;
+}
+
+section .selectbox_wrapper .submit_button{
+	text-align: center;
+	padding: 5px;
+	font-size: 1.5em;
+	color: #fff;
+	border: none;
+	border-radius: 30px;
+	background: linear-gradient(30deg, lightseagreen, #9c27b0);
+	opacity: 0.8;
+	outline: none;
+	transition: 200ms;
+}
+section .selectbox_wrapper .submit_button:hover{
+	opacity: 1;
+}
