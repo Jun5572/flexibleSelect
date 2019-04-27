@@ -1,3 +1,5 @@
+const TEXT_OTHERWISE = 'その他';
+
 let element = '';
 let selected_data = {
 						"category": "",
@@ -122,7 +124,7 @@ $.ajax({
 		generateOptionTags( category, child_category_data, child_category, option_attrs );
 		error.innerHTML = '';
 		category.classList.remove('is_error');
-		selected_data.child_category = 'その他';
+		selected_data.child_category = TEXT_OTHERWISE;
 		selected_data.grandson_category = '---';
 		if( category.value !== "0"){
 			child_category_wrapper.classList.remove('is_none');
@@ -132,9 +134,9 @@ $.ajax({
 	// child_categoryがchangeしたら発火
 	child_category.addEventListener( 'change', function(){
 		generateOptionTags( child_category, gson_category_data, grandson_category, option_attrs );
-		selected_data.grandson_category = 'その他';
+		selected_data.grandson_category = TEXT_OTHERWISE;
 		if(child_category.value === "0"){
-			selected_data.child_category = 'その他';
+			selected_data.child_category = TEXT_OTHERWISE;
 			selected_data.grandson_category = '---';
 			grandson_category_wrapper.classList.add('is_none');
 			return;
