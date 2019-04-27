@@ -9,6 +9,7 @@ body{
 	background: aliceblue;
 	font-size: 18px;
 	font-family: 'M PLUS Rounded 1c', sans-serif;
+	transition: 300ms;
 }
 section{
 	margin: 0 auto;
@@ -18,8 +19,9 @@ section{
 section .selectbox_wrapper{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	padding-top: 100px;
+	min-height: 391px;
 }
 
 section .selectbox_wrapper label{
@@ -36,6 +38,7 @@ section .selectbox_wrapper select{
 	height: 50px;
 	outline: none;
 }
+
 
 footer{
 	position: fixed;
@@ -66,6 +69,70 @@ footer .submit_button:hover{
 }
 
 
+ /* === ボタンを表示するエリア ============================== */
+.switchArea {
+  position: relative;            /* 親要素が基点       */
+  margin: auto;
+  padding-top: 50px;                /* 中央寄せ           */
+  width: 76px;               /* ボタンの横幅       */
+}
+
+ /* === チェックボックス ==================================== */
+.switchArea input[type="checkbox"] {
+  display: none;            /* チェックボックス非表示 */
+}
+
+ /* === チェックボックスのラベル（標準） ==================== */
+.switchArea label {
+  display: block;               /* ボックス要素に変更 */
+  box-sizing: border-box;          /* 枠線を含んだサイズ */
+  height: 38px;                /* ボタンの高さ       */
+  border: 2px solid #999999;   /* 未選択タブのの枠線 */
+  border-radius: 19px;
+  cursor: pointer;                /* 角丸               */
+}
+
+ /* === チェックボックスのラベル（ONのとき） ================ */
+.switchArea input[type="checkbox"]:checked +label {
+  border-color: #bcb4ed;             /* 選択タブの枠線     */
+}
+
+ /* === 丸部分のSTYLE（標準） =============================== */
+.switchArea #swImg {
+  position: absolute;            /* 親要素からの相対位置*/
+  width: 30px;                /* 丸の横幅           */
+  height: 30px;                /* 丸の高さ           */
+  background: #999999;             /* カーソルタブの背景 */
+  top: 54px;                 /* 親要素からの位置   */
+  left: 4px;                 /* 親要素からの位置   */
+  border-radius: 15px;                /* 角丸               */
+  transition: 300ms ease-in-out;                 /* 滑らか変化         */
+}
+
+ /* === 丸部分のSTYLE（ONのとき） =========================== */
+.switchArea input[type="checkbox"]:checked ~ #swImg {
+  transform: translateX(38px);    /* 丸も右へ移動       */
+  background: #bcb4ed;             /* カーソルタブの背景 */
+}
+
+.is_error{
+	border: solid 2px crimson;
+	box-shadow: inset 0 0 10px crimson;
+}
+.error_message{
+	text-align: center;
+	color: #ed1499;
+}
+
+.is_none{
+	display: none;
+}
+
+body.night_mode{
+	background: #3d445f;
+	transition: 300ms;
+	color: #bcb4ed;
+}
 
 @media screen and (max-width: 1024px) {
     section{

@@ -1,8 +1,8 @@
 let element = '';
 let selected_data = {
 						"category": "",
-						"child_category": "",
-						"gson_category": ""
+						"child_category": "---",
+						"grandson_category": "---"
 					};
 //それぞれ要素を取得
 let category = document.querySelector('[data-js="parent_category"]');
@@ -17,8 +17,11 @@ let grandson_category_wrapper = document.getElementById('gson_category_wrapper')
 let button = document.getElementById('button');
 let disp_results = document.getElementsByClassName('show_select_contents');
 
+let error = document.getElementById('error_message');
 
-
+let parent = document.querySelector('[data-js="show_parent_contents"]');
+let child = document.querySelector('[data-js="show_child_contents"]');
+let grandson = document.querySelector('[data-js="show_gson_contents"]');
 function generateOptionTags( changedSelect, targetObjectData, targetElement, attrs ){
 	element = '';
 	targetElement.innerHTML = '';
@@ -27,6 +30,15 @@ function generateOptionTags( changedSelect, targetObjectData, targetElement, att
 	if( changedSelect === category ){
 		category_wrapper.nextElementSibling.nextElementSibling.lastElementChild.innerHTML = '';
 		category_wrapper.nextElementSibling.nextElementSibling.lastElementChild.setAttribute('disabled', true);
+		if( changedSelect.value === "0" ){
+			selected_data.category = "";
+			child_category_wrapper.classList.add('is_none');
+			grandson_category_wrapper.classList.add('is_none');
+			parent.innerHTML = '';
+			child.innerHTML = '';
+			grandson.innerHTML = '';
+		};
+		selected_data.grandson_category = '---';
 	};
 
 	// value値を取得し、整数に変換した後、そのvalue値をparent_idに持つオブジェクトを検索
@@ -42,6 +54,7 @@ function generateOptionTags( changedSelect, targetObjectData, targetElement, att
 		element = '';
 		return;
 	};
+
 	element += `<option class="${attrs.class}" data-js="${attrs.data_js}" value="${targetObjectData[0].id}">${targetObjectData[0].name}</option>`;
 	for( let i=0; i<relational_object.length; i++ ){
 		element += `<option class="${attrs.class}" data-js="${attrs.data_js}" value="${relational_object[i].id}">${relational_object[i].name}</option>`;
@@ -63,20 +76,19 @@ function generateOptionTags( changedSelect, targetObjectData, targetElement, att
 
 //ボタンが押されたときの処理
 button.addEventListener('click', function(){
-	let parent = document.querySelector('[data-js="show_parent_contents"]');
-	let child = document.querySelector('[data-js="show_child_contents"]');
-	let grandson = document.querySelector('[data-js="show_gson_contents"]');
-	// 一つでもundefinedがあった場合は処理ボタン押しても処理走らない
+
+	// Parent Categoryが「選択してください」の場合はSAVEボタン押しても処理させない
 	if( selected_data.category !== '' ){
 		parent.innerHTML = `Parent: ${selected_data.category}`;
 		child.innerHTML = `Child: ${selected_data.child_category}`;
-		grandson.innerHTML = `Grandson: ${selected_data.gson_category}`;
-	} else if( typeof parent.innerHTML === undefined ){
-		parent.innerHTML = `Parent: `;
-		child.innerHTML = `Child: `;
-		grandson.innerHTML = `Grandson: `;
+		grandson.innerHTML = `Grandson: ${selected_data.grandson_category}`;
+	} else if( selected_data.category === "" ){
+		parent.innerHTML = '';
+		child.innerHTML = '';
+		grandson.innerHTML = '';
+		error.innerHTML = 'エラー！：Parent Categoryは選択必須項目です！';
+		category.classList.add('is_error');
 	};
-	selected_data = {};
 });
 
 $.ajax({
@@ -107,18 +119,39 @@ $.ajax({
 	//parent_categoryがchangeしたら発火
 	category.addEventListener( 'change', function(){
 		generateOptionTags( category, child_category_data, child_category, option_attrs );
+		error.innerHTML = '';
+		category.classList.remove('is_error');
+		selected_data.child_category = 'その他';
+		selected_data.grandson_category = '---';
+		if( category.value !== "0"){
+			child_category_wrapper.classList.remove('is_none');
+		};
 	});
 
 	// child_categoryがchangeしたら発火
 	child_category.addEventListener( 'change', function(){
 		generateOptionTags( child_category, gson_category_data, grandson_category, option_attrs );
+		selected_data.grandson_category = 'その他';
+		if(child_category.value === "0"){
+			selected_data.child_category = 'その他';
+			selected_data.grandson_category = '---';
+			grandson_category_wrapper.classList.add('is_none');
+			return;
+		};
+		grandson_category_wrapper.classList.remove('is_none');
 	});
 
 	// gson_categoryがchangeしたとき
 	grandson_category.addEventListener('change', function(){
-		selected_data.gson_category = grandson_category[grandson_category.selectedIndex].text;
+		selected_data.grandson_category = grandson_category[grandson_category.selectedIndex].text;
 	});
 })
 .fail(function(){
 });
 
+
+
+//ナイトモードスイッチの処理
+document.querySelector('[data-js="switch_mode"]').addEventListener('click', function(){
+	document.getElementById('switch_target').classList.toggle('night_mode');
+});
