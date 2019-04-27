@@ -22,6 +22,7 @@ let error = document.getElementById('error_message');
 let parent = document.querySelector('[data-js="show_parent_contents"]');
 let child = document.querySelector('[data-js="show_child_contents"]');
 let grandson = document.querySelector('[data-js="show_gson_contents"]');
+
 function generateOptionTags( changedSelect, targetObjectData, targetElement, attrs ){
 	element = '';
 	targetElement.innerHTML = '';
@@ -137,8 +138,9 @@ $.ajax({
 			selected_data.grandson_category = '---';
 			grandson_category_wrapper.classList.add('is_none');
 			return;
+		}else{
+			grandson_category_wrapper.classList.remove('is_none');
 		};
-		grandson_category_wrapper.classList.remove('is_none');
 	});
 
 	// gson_categoryがchangeしたとき
